@@ -10,7 +10,7 @@ namespace Calculator1
     [TestFixture]
     public class Tests
     {
-        //private Calculator calculator;
+        private Calculator calculator;
         [SetUp]
         public void TestSetup()
         {
