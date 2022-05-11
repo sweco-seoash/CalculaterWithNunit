@@ -2,8 +2,7 @@ using Calculater;
 using CalculatorWithNunit;
 using NUnit.Framework;
 using System;
-
-
+using System.Threading.Tasks;
 
 namespace Calculator1
 {
@@ -62,7 +61,7 @@ namespace Calculator1
             Console.WriteLine("Are not equal");
             //Assert.AreNotEqual();
         }
-        [Test]
+        [Test, Description("En kommentar")]
         public void ButtonSum_Operation_IsTrue()
         {
             Calculator expected = new Calculator();
@@ -79,6 +78,7 @@ namespace Calculator1
             Assert.That(actual, Is.False);
         }
         [Test]
+        [Ignore("Kommentar. Kan vara kos som ska fixas")]
         public void ButtonCE_GetZero_IsNull()
         {
             Calculator expected = new Calculator();
@@ -93,15 +93,52 @@ namespace Calculator1
             string actual = expected.ButtonCE(zero);
             Assert.IsNotNull(actual);
         }
-        [Test]
-        public void Method_Scenario_IsNaN()
+        [Test(ExpectedResult = 4)]
+        public int TestAdd()
         {
-
+            return 2 + 2;
         }
         [Test]
         public void Method_Scenario_Contains()
         {
 
+        }
+        [Test]
+        public async Task AddAsync()
+        {
+            /* ... */ 
+        }
+        [Test(ExpectedResult = 4)]
+        public async Task<int> TestTask()
+        {
+            //await 5000;
+            return 2 + 2;
+        }
+        [TestCase(2, 2, ExpectedResult = 4)]
+        [TestCase(5, 5, ExpectedResult = 10)]
+        [TestCase(7, 8, ExpectedResult = 14)]
+        [TestCase(25, 75, ExpectedResult = 100)]
+        public int TestingTestCase(int x, int y)
+        {
+            return x + y;
+        }
+
+
+
+
+
+
+        // Ett annat sätt att testa med cases. Kan även kalla från en annan klass
+        // 
+        static object[] AddCases =
+        {
+        new object[] { 12, 6, 6 },
+        new object[] { 12, 7, 5 },
+        };
+        [TestCaseSource(nameof(AddCases))]
+        public void Testobject(int a, int x, int y)
+        {
+            Assert.AreEqual(a, x + y);
         }
 
 

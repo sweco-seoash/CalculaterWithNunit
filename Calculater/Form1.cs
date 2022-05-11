@@ -33,7 +33,7 @@ namespace Calculater
         }
         public void button_Click(object sender, EventArgs e)
         {
-            if ((result.Text == "0") || (operationPressed)) // Kunde inte plocka ut if-stasen till en egen metod
+            if ((result.Text == "0") || (operationPressed))
             {
                 result.Clear();
             }
