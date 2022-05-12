@@ -3,12 +3,16 @@ using CalculatorWithNunit;
 using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
+//https://xunit.net/docs/comparisons - Jämförelser
+
 
 namespace Calculator1
 {
     [TestFixture]
     public class Tests
     {
+
+        //-----------------SETUP/TEARDOWN----------------------------------//
         private Calculator calculator;
         [SetUp] // Används innanför en TestFixture
         public void Init()
@@ -23,6 +27,7 @@ namespace Calculator1
         {
             // product = null
             // result = false;
+            calculator = null;
             Console.WriteLine("After Test");
         }
         [Test]
@@ -35,6 +40,17 @@ namespace Calculator1
         {
             Console.WriteLine("Test 2");
         }
+        [Test]
+        public void TestingSetup()
+        {
+            string zero = "";
+            string actual = calculator.ButtonCE(zero);
+            Console.WriteLine("Testing setup");
+            Assert.That("0", Is.EqualTo(actual));
+        }
+
+
+        //---------------DEKORERINGAR--------------------------//
         public void Method_Scenario_ExpectedOutcome()
         {
             
@@ -46,7 +62,7 @@ namespace Calculator1
         //[Ignore("Boken code")]
         public void ButtonCE_GetZero_AreEqualToZero()
         {
-            var calculator = new Calculator();
+            Calculator calculator = new Calculator();
             string zero = "";
             string actual = calculator.ButtonCE(zero);
             Assert.AreEqual("0", actual); // Classic Model
@@ -104,6 +120,9 @@ namespace Calculator1
         {
 
         }
+
+
+        //-------------TASK-------------------------//
         //[Test]
         //public async Task AddAsync()
         //{
@@ -128,7 +147,7 @@ namespace Calculator1
 
 
 
-
+        //--------------TESTCASE------------------------------//
         // Ett annat sätt att testa med cases. Kan även kalla från en annan klass
         // 
         static object[] AddCases =
@@ -144,13 +163,7 @@ namespace Calculator1
 
 
 
-
-
-
-
-
-
-
+        //-----------------JÄMFÖRELSER-----------------------------//
         // Jämförelse med xUnit
         // Nunit kör alla testerna efter varandra
         // Test2 kan inte bli 1
@@ -169,26 +182,6 @@ namespace Calculator1
             myInt++;
             Assert.That(myInt, Is.EqualTo(1));
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // En jämnförelse med Xunit
         [Test]
         public void PassingTest()
