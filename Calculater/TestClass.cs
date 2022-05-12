@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 namespace CalculatorWithNunit
 {
     public class TestClass
-    {
-        
-       
+    {    
             public double Add(double x, double y)
             {
                 return x + y;
@@ -26,6 +24,5 @@ namespace CalculatorWithNunit
             {                
                 return num1 + num2;
             }
-        
     }
 }

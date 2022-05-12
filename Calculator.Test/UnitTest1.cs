@@ -10,8 +10,8 @@ namespace Calculator1
     public class Tests
     {
         private Calculator calculator;
-        [SetUp]
-        public void TestSetup()
+        [SetUp] // Används innanför en TestFixture
+        public void Init()
         {
             // new product
             // result = false;
@@ -19,7 +19,7 @@ namespace Calculator1
             Console.WriteLine("Before Test");
         }
         [TearDown]
-        public void TestTearDown()
+        public void Cleanup()
         {
             // product = null
             // result = false;
@@ -46,9 +46,9 @@ namespace Calculator1
         //[Ignore("Boken code")]
         public void ButtonCE_GetZero_AreEqualToZero()
         {
-            var expected = new Calculator();
+            var calculator = new Calculator();
             string zero = "";
-            string actual = expected.ButtonCE(zero);
+            string actual = calculator.ButtonCE(zero);
             Assert.AreEqual("0", actual); // Classic Model
             Assert.That(actual, Is.EqualTo("0")); // Constraint Model
             Console.WriteLine("Are equal to zero");
@@ -78,13 +78,14 @@ namespace Calculator1
             Assert.That(actual, Is.False);
         }
         [Test]
-        [Ignore("Kommentar. Kan vara kos som ska fixas")]
+        [Ignore("Kommentar. Kan vara kod som ska fixas")]
         public void ButtonCE_GetZero_IsNull()
         {
             Calculator expected = new Calculator();
 
             //Assert.IsNull();
         }
+        [Category("Kategorinamn")]
         [Test]
         public void ButtonCE_GetZero_ISNotNull()
         {
@@ -103,17 +104,17 @@ namespace Calculator1
         {
 
         }
-        [Test]
-        public async Task AddAsync()
-        {
-            /* ... */ 
-        }
-        [Test(ExpectedResult = 4)]
-        public async Task<int> TestTask()
-        {
-            //await 5000;
-            return 2 + 2;
-        }
+        //[Test]
+        //public async Task AddAsync()
+        //{
+        //    /* ... */ 
+        //}
+        //[Test(ExpectedResult = 4)]
+        //public async Task<int> TestTask()
+        //{
+        //    //await 5000;
+        //    return 2 + 2;
+        //}
         [TestCase(2, 2, ExpectedResult = 4)]
         [TestCase(5, 5, ExpectedResult = 10)]
         [TestCase(7, 8, ExpectedResult = 14)]
