@@ -11,15 +11,16 @@ namespace Calculator1
     [TestFixture]
     public class Tests
     {
-
         //-----------------SETUP/TEARDOWN----------------------------------//
         private Calculator calculator;
+        private TestClass testClass;
         [SetUp] // Används innanför en TestFixture
         public void Init()
         {
             // new product
             // result = false;
             calculator = new Calculator();
+            testClass = new TestClass();
             Console.WriteLine("Before Test");
         }
         [TearDown]
@@ -27,12 +28,14 @@ namespace Calculator1
         {
             // product = null
             // result = false;
-            calculator = null;
+            calculator.Dispose();
+            testClass = null;
             Console.WriteLine("After Test");
         }
         [Test]
         public void SetupTest1()
         {
+            
             Console.WriteLine("Test 1");
         }
         [Test]
@@ -45,24 +48,21 @@ namespace Calculator1
         {
             string zero = "";
             string actual = calculator.ButtonCE(zero);
-            Console.WriteLine("Testing setup");
             Assert.That("0", Is.EqualTo(actual));
+            Console.WriteLine("Testing setup");
         }
 
 
         //---------------DEKORERINGAR--------------------------//
         public void Method_Scenario_ExpectedOutcome()
-        {
-            
+        {            
             // Assign
             // Act
             // Assert(expected, actual)
         }
         [Test, Order(1)]
-        //[Ignore("Boken code")]
         public void ButtonCE_GetZero_AreEqualToZero()
         {
-            Calculator calculator = new Calculator();
             string zero = "";
             string actual = calculator.ButtonCE(zero);
             Assert.AreEqual("0", actual); // Classic Model
@@ -72,24 +72,20 @@ namespace Calculator1
         
         [Test, Order(2)]
         public void Method_Scenario_AreNotEqual()
-        {
-            Calculator expected = new Calculator();
+        {           
             Console.WriteLine("Are not equal");
             //Assert.AreNotEqual();
         }
         [Test, Description("En kommentar")]
         public void ButtonSum_Operation_IsTrue()
         {
-            Calculator expected = new Calculator();
-
             //Assert.IsTrue();            
         }
         [Test]
         public void Buttons_ReturnFalse_IsFalse()
         {
-            Calculator expected = new Calculator();
             bool operation = false; // kan sättas till både true or false, påverkar inte resultatet men måste initeras för att få ett argument till metoden Button
-            var actual = expected.Buttons(operation);
+            var actual = calculator.Buttons(operation);
             Assert.IsFalse(actual);
             Assert.That(actual, Is.False);
         }
@@ -97,20 +93,17 @@ namespace Calculator1
         [Ignore("Kommentar. Kan vara kod som ska fixas")]
         public void ButtonCE_GetZero_IsNull()
         {
-            Calculator expected = new Calculator();
-
             //Assert.IsNull();
         }
         [Category("Kategorinamn")]
         [Test]
         public void ButtonCE_GetZero_ISNotNull()
         {
-            Calculator expected = new Calculator();
             string zero = "";
-            string actual = expected.ButtonCE(zero);
+            string actual = calculator.ButtonCE(zero);
             Assert.IsNotNull(actual);
         }
-        [Test(ExpectedResult = 4)]
+        [Test(ExpectedResult = 4)] // Man kan inte ha exected result till en void metod
         public int TestAdd()
         {
             return 2 + 2;
@@ -134,17 +127,6 @@ namespace Calculator1
         //    //await 5000;
         //    return 2 + 2;
         //}
-        [TestCase(2, 2, ExpectedResult = 4)]
-        [TestCase(5, 5, ExpectedResult = 10)]
-        [TestCase(7, 8, ExpectedResult = 14)]
-        [TestCase(25, 75, ExpectedResult = 100)]
-        public int TestingTestCase(int x, int y)
-        {
-            return x + y;
-        }
-
-
-
 
 
         //--------------TESTCASE------------------------------//
@@ -160,11 +142,17 @@ namespace Calculator1
         {
             Assert.AreEqual(a, x + y);
         }
+        [TestCase(2, 2, ExpectedResult = 4)]
+        [TestCase(5, 5, ExpectedResult = 10)]
+        [TestCase(7, 8, ExpectedResult = 14)]
+        [TestCase(25, 75, ExpectedResult = 100)]
+        public int TestingTestCase(int x, int y)
+        {
+            return x + y;
+        }
 
 
-
-        //-----------------JÄMFÖRELSER-----------------------------//
-        // Jämförelse med xUnit
+        //-------------------HUR TESTET KÖRS----------------------------------------//
         // Nunit kör alla testerna efter varandra
         // Test2 kan inte bli 1
         private int myInt = 0;
@@ -182,12 +170,19 @@ namespace Calculator1
             myInt++;
             Assert.That(myInt, Is.EqualTo(1));
         }
+
+
+        //-----------------JÄMFÖRELSER-----------------------------//
         // En jämnförelse med Xunit
         [Test]
         public void PassingTest()
-        {
-            TestClass calc = new TestClass();
-            Assert.AreEqual(4, calc.Add(2, 2));
+        {            
+            Assert.AreEqual(4, testClass.Add(2, 2));
         }
+
+
+        //--------------KOMMENTARER----------------------------------//
+        // Enkelt att kommentera. Console.WriteLine("Kommentar");
+        // Synd sedan i loggen
     }
 }
