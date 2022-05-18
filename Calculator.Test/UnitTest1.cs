@@ -12,8 +12,8 @@ namespace Calculator1
     public class Tests
     {
         //-----------------SETUP/TEARDOWN----------------------------------//
-        private Calculator calculator;
-        private TestClass testClass;
+        private Calculator calculator { get; set; }
+        private TestClass testClass { get; set; }
         [SetUp] // Används innanför en TestFixture
         public void Init()
         {
@@ -28,28 +28,18 @@ namespace Calculator1
         {
             // product = null
             // result = false;
-            calculator.Dispose();
+            calculator = null;
             testClass = null;
-            Console.WriteLine("After Test");
-        }
-        [Test]
-        public void SetupTest1()
-        {
-            
-            Console.WriteLine("Test 1");
-        }
-        [Test]
-        public void SetupTest2()
-        {
-            Console.WriteLine("Test 2");
         }
         [Test]
         public void TestingSetup()
         {
+            // Arrange
             string zero = "";
+            // Act
             string actual = calculator.ButtonCE(zero);
-            Assert.That("0", Is.EqualTo(actual));
-            Console.WriteLine("Testing setup");
+            // Assert
+            Assert.AreEqual("0", actual);            
         }
 
 
@@ -63,6 +53,7 @@ namespace Calculator1
         [Test, Order(1)]
         public void ButtonCE_GetZero_AreEqualToZero()
         {
+            Calculator calculator = new Calculator();
             string zero = "";
             string actual = calculator.ButtonCE(zero);
             Assert.AreEqual("0", actual); // Classic Model
