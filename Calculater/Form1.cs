@@ -19,7 +19,7 @@ namespace Calculater
             value = 0;
             equation.Text = "";
         }
-        public void buttonC_Click(object sender, EventArgs e)
+        private void buttonC_Click(object sender, EventArgs e)
         {
             ButtonC();
         }
@@ -31,7 +31,7 @@ namespace Calculater
             }
             return operationPressed = false;
         }
-        public void button_Click(object sender, EventArgs e)
+        private void button_Click(object sender, EventArgs e)
         {
             if ((result.Text == "0") || (operationPressed))
             {
@@ -55,11 +55,11 @@ namespace Calculater
         {
             return result.Text = "0"; // Här ändrar jag vad jag vill ha ut av ButtonCE
         }
-        public void buttonCE_Click(object sender, EventArgs e)
+        private void buttonCE_Click(object sender, EventArgs e)
         {
             ButtonCE("");  // Påverkar inte i testet, kan även skriva result.Text för att testet ska bli godkänt
         }
-        public void operator_Click(object sender, EventArgs e)
+        private void operator_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             if (value != 0)
@@ -77,7 +77,7 @@ namespace Calculater
                 equation.Text = value + " " + operation;
             }
         }
-        public void ButtonSum()
+        private void ButtonSum()
         {
             equation.Text = "";
             switch (operation)
@@ -100,7 +100,7 @@ namespace Calculater
             value = double.Parse(result.Text);
             operation = "";
         }
-        public void buttonSum_Click(object sender, EventArgs e)
+        private void buttonSum_Click(object sender, EventArgs e)
         {
             ButtonSum();
         }

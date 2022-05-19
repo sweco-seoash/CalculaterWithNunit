@@ -67,17 +67,22 @@ namespace Calculator1
         }
 
         [Test, Description("En kommentar")]
-        public void ButtonSum_Operation_IsTrue()
+        public void Buttons_Return_IsTrue()
         {
-            //Assert.IsTrue();            
+            bool operation = false; // kan sättas till både true or false, påverkar inte resultatet men måste initeras för att få ett argument till metoden Button
+            var actual = calculator.Buttons(operation);
+            Assert.IsFalse(actual);
+            Assert.That(actual, Is.True);
         }
 
 
-        [Test]
+        [Test, Description("Här kan man skriva en kommentar")]
         [Ignore("Kommentar. Kan vara kod som ska fixas")]
         public void ButtonCE_GetZero_IsNull()
         {
-            //Assert.IsNull();
+            string zero = "";
+            string actual = calculator.ButtonCE(zero);
+            Assert.IsNull(actual);
         }
 
         [Category("Kategorinamn")]
@@ -89,39 +94,17 @@ namespace Calculator1
             Assert.IsNotNull(actual);
         }
 
-        [Test(ExpectedResult = 4)] // Man kan inte ha expected result till en void metod
-        public int TestAdd()
-        {
-            return 2 + 2;
-        }
-
         [Test]
         public void Buttons_ReturnFalse_IsFalse()
         {
-            bool operation = false; // kan sättas till både true or false, påverkar inte resultatet men måste initeras för att få ett argument till metoden Button
+            bool operation = true; // kan sättas till både true or false, påverkar inte resultatet men måste initeras för att få ett argument till metoden Button
             var actual = calculator.Buttons(operation);
             Assert.IsFalse(actual);
             Assert.That(actual, Is.False);
         }
 
 
-        //-------------TASK-------------------------//
-        //[Test]
-        //public async Task AddAsync()
-        //{
-        //    /* ... */ 
-        //}
-        //[Test(ExpectedResult = 4)]
-        //public async Task<int> TestTask()
-        //{
-        //    //await 5000;
-        //    return 2 + 2;
-        //}
-
-
         //--------------TESTCASE------------------------------//
-        // Ett annat sätt att testa med cases. Kan även kalla från en annan klass
-        //
         [TestCase(4, 2, 2)]
         public void PlusTest(int a, int x, int y)
         {
@@ -145,22 +128,6 @@ namespace Calculator1
 
 
 
-        static object[] AddCases =
-        {
-        new object[] { 12, 6, 6 },
-        new object[] { 12, 7, 5 },
-        };
-        [TestCaseSource(nameof(AddCases))]
-        public void Testobject(int a, int x, int y)
-        {
-            Assert.AreEqual(a, x + y);
-        }
-
-
-
-
-
-
         //-------------------HUR TESTET KÖRS----------------------------------------//
         // Nunit kör alla testerna efter varandra
         // Test2 kan inte bli 1
@@ -181,17 +148,8 @@ namespace Calculator1
         }
 
 
-        //-----------------JÄMFÖRELSER-----------------------------//
-        // En jämnförelse med Xunit
-        [Test]
-        public void PassingTest()
-        {            
-            Assert.AreEqual(4, testClass.Add(2, 2));
-        }
-
-
         //--------------KOMMENTARER----------------------------------//
         // Enkelt att kommentera. Console.WriteLine("Kommentar");
-        // Synd sedan i loggen
+        // Syns sedan i loggen
     }
 }
