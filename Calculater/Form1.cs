@@ -15,6 +15,7 @@ namespace Calculater
         }
         public void ButtonC()
         {
+            // Här vill vi nolla allt och tömma minnet i equation
             result.Text = "0";
             value = 0;
             equation.Text = "";
@@ -27,15 +28,15 @@ namespace Calculater
         {
             if ((result.Text == "0") || (operationPressed))
             {
-                result.Clear();
+                result.Clear(); // Om result är noll eller om man redan tryckt på en operation
             }
-            return operationPressed = false;
+            return operationPressed = false; // Sätt då till false
         }
         private void button_Click(object sender, EventArgs e)
         {
             if ((result.Text == "0") || (operationPressed))
             {
-                result.Clear();
+                result.Clear(); // Om där är en nolla ska rutan bli tom
             }
             operationPressed = false;
             Button btn = (Button)sender;
@@ -43,12 +44,12 @@ namespace Calculater
             {
                 if (!result.Text.Contains(","))
                 {
-                    result.Text = result.Text + btn.Text;
+                    result.Text = result.Text + btn.Text; // Kollar om result innhåller ett komma och skriver ut reault
                 }
             }
             else
             {
-                result.Text = result.Text + btn.Text;
+                result.Text = result.Text + btn.Text; // annat skiver vi ut result här
             }
         }
         public string ButtonCE(string y)
@@ -64,6 +65,7 @@ namespace Calculater
             Button btn = (Button)sender;
             if (value != 0)
             {
+                // Om där INTE är en nolla i result
                 buttonSum.PerformClick();
                 operationPressed = true;
                 operation = btn.Text;
@@ -77,8 +79,9 @@ namespace Calculater
                 equation.Text = value + " " + operation;
             }
         }
-        private void ButtonSum()
+        public void ButtonSum()
         {
+            // Uträkningen
             equation.Text = "";
             switch (operation)
             {
